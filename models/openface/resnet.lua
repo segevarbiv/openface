@@ -12,13 +12,14 @@
 imgDim = 224
 
 local nn = require 'nn'
---require 'cunn'
+require 'cunn'
+require 'cudnn'
 
-local Convolution = nn.SpatialConvolution
-local Avg = nn.SpatialAveragePooling
-local ReLU = nn.ReLU
-local Max = nn.SpatialMaxPooling
-local SBatchNorm = nn.SpatialBatchNormalization
+--local Convolution = nn.SpatialConvolution
+--local Avg = nn.SpatialAveragePooling
+--local ReLU = nn.ReLU
+--local Max = nn.SpatialMaxPooling
+--local SBatchNorm = nn.SpatialBatchNormalization
 
 function createModel()
    local depth = 18
@@ -183,7 +184,7 @@ function createModel()
 --   G:copy(preG)
    -- requires changing the last layer to our wanted embeddingSize (4096)
    model:remove()
-   model:add(nn.Linear(nFeatures, embSize))
+   model:add(nn.Linear(nFeatures, opt.embSize))
 
    return model
 end
